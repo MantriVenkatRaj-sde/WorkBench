@@ -1,13 +1,16 @@
 package com.mantrivenkatraj.workbench.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-@Table(name = "Users")
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
 @Builder
@@ -19,23 +22,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Username must be provided")
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotEmpty(message = "Password must not be empty")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
     @Column(nullable = false)
-    private String passwordHash;
+    private String password;
 
-    @Column(nullable = false)
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     private LocalDateTime lastLogin;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AccStatus accountStatus = AccStatus.ACTIVE;
+    private AccStatus accountStatus;
+
+    @Column(nullable = false, unique = true)
+    @Email(message = "Enter aa valid email")
+    private String email;
 
     public enum AccStatus {
         ACTIVE,
