@@ -16,7 +16,9 @@ public record SignUpRequest(
         String email,
 
         @NotBlank(message = "Phone is required")
-        @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
+        @Pattern(
+                regexp = "^\\+[1-9]\\d{7,14}$",
+                message = "Phone number must be in international format (e.g. +919876543210)")
         String phone,
         @PositiveOrZero(message = "Your age is mentioned")
         int age

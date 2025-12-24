@@ -26,5 +26,4 @@ public class ProjectSkill {
 
     @Column(columnDefinition = "TEXT")
     private String evidence;
-    // Example: "Implemented CNN for image classification using PyTorch"
 }

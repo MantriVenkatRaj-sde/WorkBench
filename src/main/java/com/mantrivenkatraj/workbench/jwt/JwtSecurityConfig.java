@@ -42,9 +42,9 @@ public class JwtSecurityConfig {
     @Order(1)
     SecurityFilterChain publicSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/","/signup", "/authenticate", "/actuator/**")
+                .securityMatcher("/", "/signup", "/authenticate", "/actuator/**")
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ Enable CORS
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll()
                 )
@@ -118,7 +118,7 @@ public class JwtSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:3001"));
+        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5174"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("Authorization"));

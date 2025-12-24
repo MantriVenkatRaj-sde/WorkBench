@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mantrivenkatraj</groupId>
-	<artifactId>workbench</artifactId>
+	<artifactId>workbenchBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>workbench</name>
 	<description>Demo project for Spring Boot</description>
