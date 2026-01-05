@@ -16,6 +16,8 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -53,6 +55,14 @@ public class JWTAuthenticationResource {
         );
 
         return new JwtResponse(createToken(authentication));
+    }
+    @GetMapping("/debug/token")
+    public ResponseEntity<?> debugToken(Authentication authentication) {
+        return ResponseEntity.ok(Map.of(
+                "name", authentication.getName(),
+                "authorities", authentication.getAuthorities(),
+                "details", Objects.requireNonNull(authentication.getDetails())
+        ));
     }
 
 

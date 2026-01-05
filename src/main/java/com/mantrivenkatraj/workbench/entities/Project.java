@@ -32,7 +32,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
-    private Member owner;
+    private Member member;
 
     public enum ProjectStatus {
         DRAFT,

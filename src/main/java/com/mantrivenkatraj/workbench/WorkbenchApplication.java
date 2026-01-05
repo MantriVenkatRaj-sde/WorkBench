@@ -10,5 +10,4 @@ public class WorkbenchApplication {
 		SpringApplication.run(WorkbenchApplication.class, args);
 		System.out.println("Application has started !@!");
 	}
-
 }

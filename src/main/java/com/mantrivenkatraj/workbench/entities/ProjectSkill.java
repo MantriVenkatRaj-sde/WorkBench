@@ -1,10 +1,17 @@
 package com.mantrivenkatraj.workbench.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
-@Table(name = "project_skills")
+@Table(name = "project_skills",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_project_skill",
+                        columnNames = {"project_id", "skill_id"}
+                )
+        })
 @Getter
 @Setter
 @Builder
@@ -25,5 +32,6 @@ public class ProjectSkill {
     private Skill skill;
 
     @Column(columnDefinition = "TEXT")
-    private String evidence;
+    @Size(max = 300)
+    private String usageDescription;
 }

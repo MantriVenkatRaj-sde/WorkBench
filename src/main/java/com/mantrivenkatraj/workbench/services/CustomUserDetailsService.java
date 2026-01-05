@@ -23,16 +23,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        // FIX 1: Use FULL package name to avoid confusion
         com.mantrivenkatraj.workbench.entities.User userEntity = userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
+        String authority = userEntity.getRole().name();
         // FIX 2: Explicitly use Spring's User class with full package name
         return org.springframework.security.core.userdetails.User.builder()
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())
-                .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")))
+                .authorities(Collections.singletonList(new SimpleGrantedAuthority(authority)))
                 .accountLocked(userEntity.getAccountStatus() ==
                         com.mantrivenkatraj.workbench.entities.User.AccStatus.INACTIVE)
                 .build();

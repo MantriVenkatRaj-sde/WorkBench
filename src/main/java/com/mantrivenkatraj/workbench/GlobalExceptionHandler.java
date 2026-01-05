@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(new ApiError(
                         409,
-                        "Username or Email already exists"
+                        "DataIntegrityError"
                 ));
     }
 

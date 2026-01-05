@@ -1,9 +1,10 @@
 package com.mantrivenkatraj.workbench.records;
 
+import com.mantrivenkatraj.workbench.entities.Member;
 import jakarta.validation.constraints.*;
 
-
 public record SignUpRequest(
+
         @NotBlank(message = "Username is required")
         String username,
 
@@ -18,8 +19,14 @@ public record SignUpRequest(
         @NotBlank(message = "Phone is required")
         @Pattern(
                 regexp = "^\\+[1-9]\\d{7,14}$",
-                message = "Phone number must be in international format (e.g. +919876543210)")
+                message = "Phone number must be in international format (e.g. +919876543210)"
+        )
         String phone,
-        @PositiveOrZero(message = "Your age is mentioned")
-        int age
+
+        @Min(value = 16, message = "You must be at least 16 years old")
+        int age,
+
+        @NotNull(message = "Gender is required")
+        Member.Gender gender
+
 ) {}
